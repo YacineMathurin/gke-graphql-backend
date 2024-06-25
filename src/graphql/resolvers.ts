@@ -11,11 +11,10 @@ export const resolvers = {
     async book(_, { ID }) {
       return await bookRepository.findOneBy({ id: ID });
     },
-    async getBooks(_, {amount}) {
-      
+    async getBooks(_, { set }) {
       return await bookRepository.find({
         order: { createdAt: "DESC" },
-        take: amount,
+        take: set,
       });
     },
   },
@@ -31,11 +30,11 @@ export const resolvers = {
     },
     async deleteBook(_, { ID }) {
       const res = await bookRepository.delete({ id: ID });
-      return res.affected ? true:false;
+      return res.affected ? true : false;
     },
     async editBook(_, { ID, bookInput }) {
-      const res = await bookRepository.update(ID,bookInput);
-      return res.affected ? true:false;
+      const res = await bookRepository.update(ID, bookInput);
+      return res.affected ? true : false;
     },
   },
 };
