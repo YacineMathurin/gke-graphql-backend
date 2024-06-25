@@ -22,6 +22,7 @@ spec:
       containers:
         - name: book-management-api-image
           image: yacinemathurin/node-typeorm-gql
+          imagePullPolicy: Always
           env:
           - name: MYSQL_PASSWORD
             valueFrom:
