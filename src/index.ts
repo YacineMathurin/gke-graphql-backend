@@ -2,6 +2,12 @@ import { ApolloServer } from "apollo-server";
 import { AppDataSource } from "./data-source";
 import { resolvers } from "./graphql/resolvers";
 import { typeDefs } from "./graphql/typedefs";
+import { Request } from "express";
+import cors = require("cors");
+import express = require("express");
+const app = express();
+
+app.use("/graphql", cors<Request>());
 
 const server = new ApolloServer({
   typeDefs,
