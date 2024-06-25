@@ -62,4 +62,4 @@ jobs:
     - name: Deploy on the GKE
       run: |-
         sed -i -e 's/DOCKER_IMG_TAG/'${{ github.sha }}'/' ./kubernetes/book-mgmt-api-deploy.yaml
-        kubectl delete -f ./kubernetes/book-mgmt-api-deploy.yaml && kubectl apply -f ./kubernetes/
+        kubectl apply -f ./kubernetes/
