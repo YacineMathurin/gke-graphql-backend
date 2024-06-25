@@ -18,12 +18,12 @@ export const typeDefs = gql`
     type Query {
         books: [Book]
         book(ID: ID!): Book!
-        getBooks(amont: Int): [Book]
+        getBooks(amount: Int): [Book]
     }
 
     type Mutation {
         addBook(bookInput: BookInput!): Book!
-        editBook(bookInput: BookInput): Book
+        editBook(ID: ID!, bookInput: BookInput): Boolean
         deleteBook(ID: ID!): Boolean
     }
 `
