@@ -11,10 +11,10 @@ export const resolvers = {
     async book(_, { ID }) {
       return await bookRepository.findOneBy({ id: ID });
     },
-    async getBooks(_, { set }) {
+    async getBooks(_, { amount }) {
       return await bookRepository.find({
         order: { createdAt: "DESC" },
-        take: set,
+        take: amount,
       });
     },
   },
