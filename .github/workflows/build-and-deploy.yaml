@@ -32,7 +32,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/node-typeorm-gql:${{ github.sha }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/node-typeorm-gql:latest
   
   setup-and-deploy:
     needs: [create-image-and-push-to-dockerhub]
@@ -61,5 +61,4 @@ jobs:
 
     - name: Deploy on the GKE
       run: |-
-        sed -i -e 's/DOCKER_IMG_TAG/'${{ github.sha }}'/' ./kubernetes/book-mgmt-api-deploy.yaml
         kubectl apply -f ./kubernetes/
