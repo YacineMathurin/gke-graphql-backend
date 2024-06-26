@@ -61,5 +61,5 @@ jobs:
 
     - name: Deploy on the GKE
       run: |-
-        kubectl scale deployment book-mgmt-api-deploy -n development--replicas=0
+        kubectl scale deployment book-mgmt-api-deploy -n development --replicas=0
         kubectl apply -f ./kubernetes/
