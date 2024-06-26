@@ -17,7 +17,7 @@ const server = new ApolloServer({
 AppDataSource.initialize()
   .then(async () => {
     console.log("Connected to the database.");
-    return server.listen({ port: 5001 });
+    return server.listen({ port: 5000 });
   })
   .then((res) => {
     console.log("Server listening on port", res.port);
