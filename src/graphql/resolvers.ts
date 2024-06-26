@@ -13,7 +13,7 @@ export const resolvers = {
     },
     async getBooks(_, { amount }) {
       return await bookRepository.find({
-        order: { createdAt: "DESC" },
+        order: { createdAt: "ASC" },
         take: amount,
       });
     },
