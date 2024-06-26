@@ -18,7 +18,7 @@ export const typeDefs = gql`
     type Query {
         books: [Book]
         book(ID: ID!): Book!
-        getBooks(amount: Int!): [Book]
+        getBooks(qty: Int!): [Book]
     }
 
     type Mutation {
