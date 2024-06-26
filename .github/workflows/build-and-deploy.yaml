@@ -61,4 +61,4 @@ jobs:
 
     - name: Deploy on the GKE
       run: |-
-        kubectl delete -f deployment/book-mgmt-api-deploy && kubectl apply -f ./kubernetes/
+        kubectl scale deployment book-mgmt-api-deploy --replicas=0 && kubectl apply -f ./kubernetes/
