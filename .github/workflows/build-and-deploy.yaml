@@ -5,7 +5,6 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-  workflow_dispatch:
 
 jobs:
   create-image-and-push-to-dockerhub:
@@ -32,7 +31,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/node-typeorm-gql:latest
+          tags: niranjang2/books_management_service:${{ github.sha }}
   
   setup-and-deploy:
     needs: [create-image-and-push-to-dockerhub]
@@ -61,5 +60,5 @@ jobs:
 
     - name: Deploy on the GKE
       run: |-
-        kubectl scale deployment book-mgmt-api-deploy -n development --replicas=0
-        kubectl apply -f ./kubernetes/
+        sed -i -e 's/DOCKER_IMG_TAG/'${{ github.sha }}'/' ./kubernetes/book-mgmt-api-deploy.yaml
+        kubectl scale deployment book-mgmt-api-deploy -n development --replicas=0 && kubectl apply -f ./kubernetes/
