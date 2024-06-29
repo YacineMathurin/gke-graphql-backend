@@ -5,3 +5,5 @@ build/
 tmp/
 temp/
 .env
+jobs/mbay-kubernetes-app-86b54cbda593.json
+jobs/config
