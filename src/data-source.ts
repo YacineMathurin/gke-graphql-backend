@@ -1,8 +1,7 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
 import { Book } from "./entity/Book"
-
-const dotenv = require('dotenv');
+import dotenv from "dotenv"
 dotenv.config({ path: './.env' });
 
 const {MYSQL_DATABASE,MYSQL_USER,MYSQL_PASSWORD, MYSQL_HOST} = process.env;
@@ -16,7 +15,7 @@ export const AppDataSource = new DataSource({
     database: MYSQL_DATABASE,
     synchronize: true,
     logging: false,
-    entities: [Book],
+    entities: [Book], 
     migrations: [],
     subscribers: [],
 })

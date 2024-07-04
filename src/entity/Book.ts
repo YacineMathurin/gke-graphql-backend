@@ -6,15 +6,23 @@ export class Book {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column()
+    @Column({
+        type: "text"
+    })
     title: string
 
-    @Column()
+    @Column({
+        type: "text"
+    })
     author: string
 
-    @Column()
+    @Column({
+        type: "int"
+    })
     age: number
 
-    @Column()
+    @Column({
+        type: "text"
+    })
     createdAt: string
 }
