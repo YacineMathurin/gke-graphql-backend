@@ -17,6 +17,6 @@ AppDataSource.initialize()
     });
   })
   .then((res) => {
-    console.log("Server listening on port", res.url);
+    console.log("Server listening on port", res.url); 
   })
   .catch((error) => console.log(error));
