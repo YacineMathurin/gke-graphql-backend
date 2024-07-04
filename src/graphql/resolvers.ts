@@ -3,7 +3,8 @@ import jwt from "jsonwebtoken";
 import { Book } from "../entities/Book";
 import { User } from "../entities/User";
 import dotenv from "dotenv";
-import throwCustomError, {errorTypes} from "./error-handler";
+import throwCustomError, { errorTypes } from "./error-handler";
+import bcrypt from "bcrypt";
 
 dotenv.config({ path: "./.env" });
 const { JWT_EXPIRY_TIME, JWT_PRIVATE_KEY } = process.env;
@@ -32,11 +33,13 @@ export const resolvers = {
         throwCustomError("User Already exist", errorTypes.ALREADY_EXIST);
       }
 
+      const saltRounds = 10;
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
       const createUser = {
         firstname,
         lastname,
         email,
-        password,
+        password: hashedPassword,
         createdAt: new Date().toISOString(),
       };
       const user = await userRepository.save(createUser);
@@ -56,12 +59,15 @@ export const resolvers = {
       };
     },
     async signin(_, { signinInput: { email, password } }) {
-      
       const user = await userRepository.findOne({
-        where: { email, password },
+        where: { email },
       });
+      if (!user) {
+        throwCustomError("Error when Signing In !", errorTypes.BAD_USER_INPUT);
+      }
+      const passwordMatched = await bcrypt.compare(password, user.password)
 
-      if (user) {
+      if (passwordMatched) {
         const { id, email, firstname, lastname } = user;
         const token = await jwt.sign(
           {
